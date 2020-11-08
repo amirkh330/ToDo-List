@@ -15,6 +15,7 @@ const App = () => {
             ...list,
             { text: input, id: Math.random() * 100, completed: false },
         ]);
+        setInput("")
     };
     const handleTrash = (i) => {
         setList(list.filter((o) => o.id !== i.id));
