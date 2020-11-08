@@ -13,6 +13,9 @@ const App = () => {
     const handlePluse = () => {
         setList([...list, { text: input, id: Math.random() * 100 }]);
     };
+    const handleTrash = (i) => {
+        setList(list.filter(o=>o.id!==i.id))
+    }
     return (
         <>
             <div className="master">
@@ -21,7 +24,7 @@ const App = () => {
                     onPluse={handlePluse}
                     onChange={handleChange}
                 />
-                <List list={list} />
+                <List list={list} onTrash={handleTrash}/>
             </div>
         </>
     );

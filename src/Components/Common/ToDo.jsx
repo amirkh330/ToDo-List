@@ -1,10 +1,8 @@
 import React from "react";
 
-const ToDo = ({ola}) => {
+const ToDo = ({ola,onTrash,onCheck}) => {
     
-    const onTrash=()=>{
-        delete button
-    }
+    
 
     return (
         <div className="todo-form">
