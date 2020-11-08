@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.master {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+.input_form {
+    padding: 10%;
+    display: flex;
+    justify-content: center;
+}
+.input {
+    width: 40%;
+    font-size: 120%;
+}
+.button {
+    font-size: 120%;
+    color: orangered;
+}
+.todo-form {
+    display: flex;
+    padding: 10px 0;
+    font-size: 25px;
+    justify-content: center;
+    list-style-type: none;
+}
+.todo-item {  
+    background-color: white;
+    width: 40%;
+    text-align: center;
+}
+.fa-trash {
+    color: red;
+    size: 220%;
+}
+.fa-check-square {
+    color: green;
+}
+.na{
+  margin: 0 5px;
+}
