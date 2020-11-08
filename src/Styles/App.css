@@ -2,6 +2,10 @@ body {
     margin: 0;
     padding: 0;
 }
+.completed{
+    text-decoration-line:line-through;
+    opacity: 0.5;
+}
 
 .master {
     width: 100vw;

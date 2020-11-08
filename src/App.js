@@ -11,11 +11,20 @@ const App = () => {
     };
 
     const handlePluse = () => {
-        setList([...list, { text: input, id: Math.random() * 100 }]);
+        setList([
+            ...list,
+            { text: input, id: Math.random() * 100, completed: false },
+        ]);
     };
     const handleTrash = (i) => {
-        setList(list.filter(o=>o.id!==i.id))
-    }
+        setList(list.filter((o) => o.id !== i.id));
+    };
+    const handleCheck = (i) => {
+        const allList = [...list];
+        const index = allList.indexOf(i);
+        allList[index].completed = !allList[index].completed;
+        setList(allList);
+    };
     return (
         <>
             <div className="master">
@@ -24,7 +33,7 @@ const App = () => {
                     onPluse={handlePluse}
                     onChange={handleChange}
                 />
-                <List list={list} onTrash={handleTrash}/>
+                <List list={list} onCheck={handleCheck} onTrash={handleTrash} />
             </div>
         </>
     );
