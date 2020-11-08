@@ -8,6 +8,7 @@ const App = () => {
 
     const handleChange = (e) => {
         setInput(e.target.value);
+        console.log(input);
     };
 
     const handlePluse = () => {
