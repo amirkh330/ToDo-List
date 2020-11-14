@@ -1,34 +1,32 @@
 import React from "react";
+const Todo = ({ todo, setTodos, todos,setFilterd }) => {
+    const handleDelete = () => {
+        setFilterd(todos.filter((t) => t.text !== todo.text));
+    };
 
-const ToDo = ({ ola, onTrash, onCheck }) => {
-    // const handleStyle = () => {
-    //     if (ola.completed === true) {
-    //         return "textdecorationline: underline";
-    //     } else {
-    //         return null;
-    //     }
-    // };
-    console.log(ola);
+    const handleCheck = () => {
+       const Todo = [...todos]
+       const index = Todo.indexOf(todo)
+       Todo[index].completed = !Todo[index].completed
+       setTodos(Todo)
+    };
     return (
-        <div className="todo-form">
-            <li
-                className=
-                {
-                    ola.completed  ? 
-                    "todo-item completed" 
-                    : "todo-item"
-                }
-            >
-                {ola.text}
+        <>
+            <li className="li">
+                <div className={todo.completed ? "check" : 'uncheck'}>
+                    {todo.text}
+                </div>
+                <div className="l2">
+                    <button>
+                        <i onClick={handleCheck} className="fa fa-check l2" />
+                    </button>
+                    <button>
+                        <i onClick={handleDelete} className="fa fa-trash l2" />
+                    </button>
+                </div>
             </li>
-            <button onClick={onTrash} className="na">
-                <i className="fa fa-trash"></i>
-            </button>
-            <button onClick={onCheck}>
-                <i className="fa fa-check-square"></i>
-            </button>
-        </div>
+        </>
     );
 };
 
-export default ToDo;
+export default Todo;

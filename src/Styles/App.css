@@ -1,50 +1,57 @@
 body {
     margin: 0;
     padding: 0;
-}
-.completed{
-    text-decoration-line:line-through;
-    opacity: 0.5;
-}
-
-.master {
     width: 100vw;
     height: 100vh;
     background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
-
-.input_form {
-    padding: 10%;
+.master {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.title {
+    color: white;
+    font-size: 300%;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+.form {
     display: flex;
     justify-content: center;
+    transform: scale(1.4);
+    width: 70%;
 }
 .input {
-    width: 40%;
-    font-size: 120%;
+    width: 30%;
+    height: 20%;
 }
-.button {
-    font-size: 120%;
-    color: orangered;
+ul {
+    transform: scale(1.4);
+    padding: 0;
 }
-.todo-form {
-    display: flex;
-    padding: 10px 0;
-    font-size: 25px;
-    justify-content: center;
+li {
     list-style-type: none;
-}
-.todo-item {  
     background-color: white;
-    width: 40%;
-    text-align: center;
+    width: 25rem;
+    text-align: start;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    margin: 3% 0;
+    opacity: 1;
 }
-.fa-trash {
-    color: red;
-    size: 220%;
+.l2 {
+    background-color: #e5e5e5;
 }
-.fa-check-square {
-    color: green;
+
+.check {
+    opacity: 0.7;
+    text-decoration-line: line-through;
+    margin-left: 10px;
 }
-.na{
-  margin: 0 5px;
+.uncheck {
+    opacity: 1;
+    padding-left: 2%;
 }

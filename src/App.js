@@ -1,41 +1,72 @@
-import React, { useState } from "react";
-import Add from "./Components/Main/Add";
-import List from "./Components/Main/List";
+import React, { useEffect, useState } from "react";
+import Form from "./Components/Main/Form";
+import TodoList from "./Components/Main/TodoList";
 
 const App = () => {
-    const [input, setInput] = useState("");
-    const [list, setList] = useState([]);
+    const [inputText, setInputText] = useState("");
+    const [todos, setTodos] = useState([]);
+    const [status, setStatus] = useState("all");
+    const [filtered, setFilterd] = useState([]);
 
-    const handleChange = (e) => {
-        setInput(e.target.value);
-        console.log(input);
+    useEffect(() => {
+        getLocal();
+    }, []);
+    useEffect(() => {
+        // const filter =()=>{
+        //     setTodos(status === 'all'?todos:todos.filter(t=>t.completed === status))
+        // };
+
+        const filter = () => {
+            switch (status) {
+                case "completed":
+                    setFilterd(todos.filter((t) => t.completed === true));
+                    break;
+
+                case "uncompleted":
+                    setFilterd(todos.filter((t) => t.completed === false));
+                    break;
+
+                default:
+                    setFilterd(todos);
+                    break;
+            }
+        };
+        filter();
+        saveLocal();
+        //    setTodos(filtered)
+    }, [todos, status]);
+
+    const saveLocal = () => {
+        localStorage.setItem("todos", JSON.stringify(todos));
+    };
+    const getLocal = () => {
+        if (localStorage.getItem("todos") === null) {
+            localStorage.setItem("todos", JSON.stringify([]));
+        } else {
+            let todolocal = JSON.parse(localStorage.getItem("todos"));
+            setTodos(todolocal);
+        }
     };
 
-    const handlePluse = () => {
-        setList([
-            ...list,
-            { text: input, id: Math.random() * 100, completed: false },
-        ]);
-        setInput("")
-    };
-    const handleTrash = (i) => {
-        setList(list.filter((o) => o.id !== i.id));
-    };
-    const handleCheck = (i) => {
-        const allList = [...list];
-        const index = allList.indexOf(i);
-        allList[index].completed = !allList[index].completed;
-        setList(allList);
-    };
     return (
         <>
             <div className="master">
-                <Add
-                    input={input}
-                    onPluse={handlePluse}
-                    onChange={handleChange}
+                <p className="title">Amir ToDO List ;)</p>
+                <Form
+                    inputText={inputText}
+                    status={status}
+                    todos={todos}
+                    setFilterd={setFilterd}
+                    setTodos={setTodos}
+                    setStatus={setStatus}
+                    setInputText={setInputText}
                 />
-                <List list={list} onCheck={handleCheck} onTrash={handleTrash} />
+                <TodoList
+                    todos={todos}
+                    setTodos={setTodos}
+                    setFilterd={setFilterd}
+                    filtered={filtered}
+                />
             </div>
         </>
     );
