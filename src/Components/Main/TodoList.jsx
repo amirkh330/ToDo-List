@@ -1,12 +1,19 @@
 import React from "react";
-import Todo from "../Common/Todo";
+import Todo from "./../Common/Todo";
 
-const TodoList = ({ todos,setTodos,filtered,setFilterd }) => {
+const TodoList = ({ todos, setTodos, sort, setSort }) => {
     return (
         <>
             <ul>
-                {filtered.map((todo) => (
-                    <Todo setFilterd={setFilterd} todo={todo} key={todo.id} setTodos={setTodos} todos={todos}/>
+                {sort.map((s) => (
+                    <Todo
+                        setSort={setSort}
+                        sort={sort}
+                        setTodos={setTodos}
+                        todos={todos}
+                        key={s.id}
+                        s={s}
+                    />
                 ))}
             </ul>
         </>

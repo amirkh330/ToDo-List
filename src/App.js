@@ -6,66 +6,71 @@ const App = () => {
     const [inputText, setInputText] = useState("");
     const [todos, setTodos] = useState([]);
     const [status, setStatus] = useState("all");
-    const [filtered, setFilterd] = useState([]);
+    const [sort, setSort] = useState([]);
+    
+        useEffect(() => {
+            getLocal();
+        }, []);
 
     useEffect(() => {
-        getLocal();
-    }, []);
-    useEffect(() => {
-        // const filter =()=>{
-        //     setTodos(status === 'all'?todos:todos.filter(t=>t.completed === status))
-        // };
-
         const filter = () => {
             switch (status) {
                 case "completed":
-                    setFilterd(todos.filter((t) => t.completed === true));
+                    setSort(todos.filter((t) => t.completed === true));
                     break;
 
                 case "uncompleted":
-                    setFilterd(todos.filter((t) => t.completed === false));
+                    setSort(todos.filter((t) => t.completed === false));
                     break;
 
                 default:
-                    setFilterd(todos);
+                    setSort(todos);
                     break;
             }
         };
         filter();
-        saveLocal();
-        //    setTodos(filtered)
-    }, [todos, status]);
+        handleGetSave()
+    }, [todos,status]);
+    
 
-    const saveLocal = () => {
-        localStorage.setItem("todos", JSON.stringify(todos));
-    };
+    const handleChangeSelect = (e) => {setStatus(e.target.value);};
+
+    const handleGetSave=()=>{localStorage.setItem('todos',JSON.stringify(todos))}
+
     const getLocal = () => {
         if (localStorage.getItem("todos") === null) {
-            localStorage.setItem("todos", JSON.stringify([]));
-        } else {
-            let todolocal = JSON.parse(localStorage.getItem("todos"));
-            setTodos(todolocal);
-        }
-    };
+        localStorage.setItem("todos", JSON.stringify([]));
+    } else {
+        let todolocal = JSON.parse(localStorage.getItem("todos"));
+        setTodos(todolocal);
+    }
+    
+};
+
+    
 
     return (
         <>
             <div className="master">
-                <p className="title">Amir ToDO List ;)</p>
-                <Form
-                    inputText={inputText}
-                    status={status}
-                    todos={todos}
-                    setFilterd={setFilterd}
-                    setTodos={setTodos}
-                    setStatus={setStatus}
-                    setInputText={setInputText}
-                />
+                <h1 className="title">Amir TODO List</h1>
+                <div className="form">
+                    <Form
+                        todos={todos}
+                        setTodos={setTodos}
+                        inputText={inputText}
+                        setInputText={setInputText}
+                    />
+                    <select onChange={handleChangeSelect}>
+                        <option value="all">All</option>
+                        <option value="uncompleted">Uncompleted</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
                 <TodoList
                     todos={todos}
                     setTodos={setTodos}
-                    setFilterd={setFilterd}
-                    filtered={filtered}
+                    setSort={setSort}
+                    sort={sort}
                 />
             </div>
         </>
